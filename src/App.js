@@ -5,7 +5,7 @@ function App() {
   const [job, setJob] = useState("");
   const [jobs, setJobs] = useState(() => {
     const storageJobs = JSON.parse(localStorage.getItem("jobs")) || []; // Lấy json parse ra array
-    return storageJobs ?? []; // null or undefine láy []
+    return storageJobs ?? []; // null or undefine lấy []
   });
 
 
