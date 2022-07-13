@@ -4,12 +4,17 @@ function App() {
 
   const [job, setJob] = useState("");
   const [jobs, setJobs] = useState(() => {
-    const storageJobs = JSON.parse(localStorage.getItem("jobs")) || []; // Lấy json parse ra array
+    const storageJobs = JSON.parse(localStorage.getItem("jobs")); // Lấy json parse ra array
     return storageJobs ?? []; // null or undefine lấy []
   });
 
+  
 
   const handleSubmit = () => {
+    if (!job.length) {
+      alert("Chưa nhập Todo!");
+      return;
+    }
 
     //(2) tạo hàm submit lấy job thêm vào danh sách jobs
     setJobs((prev) => {
@@ -40,6 +45,7 @@ function App() {
   };
 
 
+
   return (
     <div className="App">
       <h1>Todo List</h1>
@@ -50,13 +56,17 @@ function App() {
           value={job}
           onChange={(e) => setJob(e.target.value)} // (1) two-way binding
         />
-        <button className="btn" onClick={handleSubmit}>Add</button>
+        <button className="btn" onClick={handleSubmit}>
+          Add
+        </button>
       </div>
 
       <ul className="list-group">
         {jobs.map((job, index) => (
           <li key={index} className="list-group-item">
+
             {job}
+
             <span className="close" onClick={() => deleteJob(index)}>
               &times;
             </span>
